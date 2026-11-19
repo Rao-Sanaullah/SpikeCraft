@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "spikeforge"
+version = "0.1.0"
+description = "Write spiking-neuron equations, get trainable PyTorch layers. Includes a model zoo (LIF, ALIF, Izhikevich, AdEx, Hodgkin-Huxley, ...)."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [{ name = "Sanaullah" }]
+keywords = ["spiking neural networks", "snn", "neuromorphic", "pytorch", "surrogate gradient", "neuron models", "event-based vision"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = ["torch>=2.0", "sympy>=1.12"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "build", "twine", "numpy"]
+bench = ["tonic>=1.4", "snntorch>=0.9", "numpy", "scipy", "matplotlib", "h5py"]
+
+[project.urls]
+Homepage = "https://rao-sanaullah.github.io/spikeforge/"
+Repository = "https://github.com/Rao-Sanaullah/spikeforge"
+Issues = "https://github.com/Rao-Sanaullah/spikeforge/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/spikeforge"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/spikeforge", "tests", "README.md", "LICENSE", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
