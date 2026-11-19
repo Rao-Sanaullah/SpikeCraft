@@ -4,7 +4,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/spikeforge.svg)](https://pypi.org/project/spikeforge/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Project page](https://img.shields.io/badge/project-page-1a6b4f.svg)](https://rao-sanaullah.github.io/spikeforge/)
+[![Project page](https://img.shields.io/badge/project-page-1a6b4f.svg)](https://rao-sanaullah.github.io/Spikeforge/)
 
 Spikeforge compiles a neuron's differential equations, spike condition and reset rules into a differentiable PyTorch module, with automatic exact-exponential integration, surrogate gradients and learnable time constants. Ten neuron models (LIF to Hodgkin–Huxley) ship as editable equation presets.
 
