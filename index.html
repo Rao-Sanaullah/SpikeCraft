@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spikeforge: equation-defined spiking neurons for efficient embedded and robotic AI</title>
-<meta name="description" content="Spikeforge is an open-source PyTorch library that turns spiking-neuron equations into trainable layers, with a model zoo of ten editable neuron presets.">
+<title>SpikeCraft: equation-defined spiking neurons for efficient embedded and robotic AI</title>
+<meta name="description" content="SpikeCraft is an open-source PyTorch library that turns spiking-neuron equations into trainable layers, with a model zoo of ten editable neuron presets.">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -147,7 +147,7 @@ nav .links a{font-size:12px}
 
 <nav>
 <div class="inner">
-<a class="brand" href="#">Spikeforge</a>
+<a class="brand" href="#">SpikeCraft</a>
 <div class="links">
 <a href="#overview">Overview</a>
 <a href="#install">Install</a>
@@ -162,17 +162,17 @@ nav .links a{font-size:12px}
 <!-- HERO -->
 <div class="hero">
 <div class="venue">Coming soon @ 2026</div>
-<h1>Spikeforge</h1>
+<h1>SpikeCraft</h1>
 <p class="subtitle">Enables fast exploration of efficient spiking neuron models for embedded and robotic AI: write a neuron as equations, get a trainable PyTorch layer.</p>
 <p class="authors">Sanaullah<sup>1</sup><!-- add co-authors here: , Name<sup>2</sup> --></p>
 <p class="affiliation"><sup>1</sup>Research Institute of AI Robotics, Korea Institute of Machinery and Materials, Daejeon, South Korea</p>
 <div class="buttons">
 <a href="#" class="btn btn-primary">Paper (PDF)</a>
-<a href="https://github.com/Rao-Sanaullah/spikeforge" class="btn btn-outline">GitHub</a>
-<a href="https://pypi.org/project/spikeforge/" class="btn btn-outline">PyPI</a>
+<a href="https://github.com/Rao-Sanaullah/spikecraft" class="btn btn-outline">GitHub</a>
+<a href="https://pypi.org/project/spikecraft/" class="btn btn-outline">PyPI</a>
 <a href="#reproduce" class="btn btn-outline">Reproduce results</a>
 </div>
-<div class="pipline"><span class="p">$</span><span id="pipcmd">pip install spikeforge</span><button onclick="copyText('pip install spikeforge',this)">Copy</button></div>
+<div class="pipline"><span class="p">$</span><span id="pipcmd">pip install spikecraft</span><button onclick="copyText('pip install spikecraft',this)">Copy</button></div>
 </div>
 
 <hr class="divider">
@@ -182,7 +182,7 @@ nav .links a{font-size:12px}
 <h2>Overview</h2>
 <p class="section-sub">Why design spiking neurons at the level of equations?</p>
 <p class="abstract-text">Spiking neural networks paired with event-based sensors are a promising route to low-power, low-latency perception for robots and other embedded systems. Their accuracy and energy cost depend strongly on the neuron model, yet deep-learning SNN libraries offer a fixed set of neurons, and adding a new one means writing its update rule and gradient code by hand.</p>
-<p class="abstract-text">Spikeforge removes that barrier. A neuron is written as differential equations, a spike condition and reset rules. Spikeforge parses them symbolically, picks an exact exponential update where the dynamics allow, attaches surrogate gradients, and returns a standard PyTorch module that trains end to end. Ten classic neurons ship as editable equation presets. With it, we compared seven neuron models under identical conditions and introduced <strong>DendALIF</strong>, a dendritic adaptive neuron defined in five lines.</p>
+<p class="abstract-text">SpikeCraft removes that barrier. A neuron is written as differential equations, a spike condition and reset rules. SpikeCraft parses them symbolically, picks an exact exponential update where the dynamics allow, attaches surrogate gradients, and returns a standard PyTorch module that trains end to end. Ten classic neurons ship as editable equation presets. With it, we compared seven neuron models under identical conditions and introduced <strong>DendALIF</strong>, a dendritic adaptive neuron defined in five lines.</p>
 
 <div class="findings-grid">
 <div class="finding-card"><div class="finding-num green">&minus;25%</div><div class="finding-label">synaptic operations with DendALIF on DVS128 Gesture, at LIF accuracy</div></div>
@@ -211,12 +211,12 @@ nav .links a{font-size:12px}
 <div class="pipe-node coral">PyTorch<br>nn.Module</div>
 </div>
 
-<p>Every expression is checked when the neuron is created, so a typo in an equation is reported immediately instead of failing silently during training. For each state variable \(x\) with dynamics \(\dot x = f_x\), Spikeforge computes \(A_x = \partial f_x / \partial x\). If \(A_x\) does not depend on \(x\), the state is advanced exactly over a step \(\Delta t\):</p>
+<p>Every expression is checked when the neuron is created, so a typo in an equation is reported immediately instead of failing silently during training. For each state variable \(x\) with dynamics \(\dot x = f_x\), SpikeCraft computes \(A_x = \partial f_x / \partial x\). If \(A_x\) does not depend on \(x\), the state is advanced exactly over a step \(\Delta t\):</p>
 <div class="eq">$$x_{n+1} = e^{A_x \Delta t}\, x_n + \frac{e^{A_x \Delta t} - 1}{A_x}\,\bigl(f_x - A_x x_n\bigr),$$</div>
 <p>and otherwise with forward Euler. Spikes are a Heaviside step in the forward pass and a smooth surrogate in the backward pass, and resets are differentiable gated updates. The compiled neuron wraps any synaptic layer (linear, convolutional, recurrent), and its time constants can be trained per neuron.</p>
 
 <figure>
-<img src="figures/workflow.png" alt="Spikeforge workflow: build once, run every time step, train with backpropagation through time">
+<img src="figures/workflow.png" alt="SpikeCraft workflow: build once, run every time step, train with backpropagation through time">
 <figcaption>Build once (top), run every time step inside a spiking layer (bottom), train with backpropagation through time and surrogate gradients.</figcaption>
 </figure>
 </section>
@@ -228,14 +228,14 @@ nav .links a{font-size:12px}
 <h2>Installation</h2>
 <p class="section-sub">Python &ge; 3.9, PyTorch &ge; 2.0, SymPy</p>
 <div class="code"><button class="copy">Copy</button><span class="c"># from PyPI</span>
-pip install spikeforge
+pip install spikecraft
 
 <span class="c"># or from source, with tests and benchmark extras</span>
-git clone https://github.com/Rao-Sanaullah/spikeforge
-cd spikeforge
+git clone https://github.com/Rao-Sanaullah/spikecraft
+cd spikecraft
 pip install -e ".[dev,bench]"
 pytest</div>
-<p>Spikeforge runs on CPU and GPU. Install the PyTorch build that matches your CUDA version first if you want GPU training.</p>
+<p>SpikeCraft runs on CPU and GPU. Install the PyTorch build that matches your CUDA version first if you want GPU training.</p>
 </section>
 
 <hr class="divider">
@@ -253,7 +253,7 @@ pytest</div>
 </div>
 
 <div class="panel active" id="p1">
-<div class="code"><button class="copy">Copy</button><span class="k">import</span> spikeforge <span class="k">as</span> sf
+<div class="code"><button class="copy">Copy</button><span class="k">import</span> spikecraft <span class="k">as</span> sf
 
 neuron = sf.Neuron(
     equations=<span class="s">"""
@@ -272,7 +272,7 @@ spikes = layer(x)          <span class="c"># x: [T, B, 128]  -&gt;  spikes: [T, 
 </div>
 
 <div class="panel" id="p2">
-<div class="code"><button class="copy">Copy</button><span class="k">from</span> spikeforge <span class="k">import</span> zoo
+<div class="code"><button class="copy">Copy</button><span class="k">from</span> spikecraft <span class="k">import</span> zoo
 
 zoo.list_models()
 <span class="c"># ['ALIF', 'AdEx', 'EIF', 'HodgkinHuxley', 'Izhikevich', 'LIF', 'QIF',</span>
@@ -285,8 +285,8 @@ hh  = zoo.HodgkinHuxley()
 </div>
 
 <div class="panel" id="p3">
-<div class="code"><button class="copy">Copy</button><span class="k">import</span> spikeforge <span class="k">as</span> sf
-<span class="k">from</span> spikeforge <span class="k">import</span> zoo
+<div class="code"><button class="copy">Copy</button><span class="k">import</span> spikecraft <span class="k">as</span> sf
+<span class="k">from</span> spikecraft <span class="k">import</span> zoo
 
 spec = zoo.spec(<span class="s">"LIF"</span>)                      <span class="c"># an editable dictionary</span>
 spec[<span class="s">"equations"</span>] = <span class="s">"dv/dt = (-(v - v_rest) + R*I + bias) / tau"</span>
@@ -295,9 +295,9 @@ my_neuron = sf.Neuron(**spec)                <span class="c"># a new neuron in t
 </div>
 
 <div class="panel" id="p4">
-<div class="code"><button class="copy">Copy</button><span class="k">import</span> torch, spikeforge <span class="k">as</span> sf
+<div class="code"><button class="copy">Copy</button><span class="k">import</span> torch, spikecraft <span class="k">as</span> sf
 <span class="k">from</span> torch <span class="k">import</span> nn
-<span class="k">from</span> spikeforge <span class="k">import</span> zoo
+<span class="k">from</span> spikecraft <span class="k">import</span> zoo
 
 neuron = zoo.ALIF(learnable=[<span class="s">"tau"</span>], per_neuron=<span class="k">True</span>)
 net = nn.Sequential(sf.SpikingLinear(neuron, <span class="n">700</span>, <span class="n">256</span>, recurrent=<span class="k">True</span>),
@@ -404,7 +404,7 @@ opt = torch.optim.Adam(net.parameters(), lr=<span class="n">2e-3</span>)
 </figure>
 
 <h3>Library: integration accuracy and speed</h3>
-<p>The exponential update is exact for LIF and remains stable for Hodgkin&ndash;Huxley at time steps where Euler diverges; Euler stays available for precise spike timing at small time steps. With the Euler update, a Spikeforge LIF layer runs at snnTorch's speed on the GPU; multi-state neurons cost more per step.</p>
+<p>The exponential update is exact for LIF and remains stable for Hodgkin&ndash;Huxley at time steps where Euler diverges; Euler stays available for precise spike timing at small time steps. With the Euler update, a SpikeCraft LIF layer runs at snnTorch's speed on the GPU; multi-state neurons cost more per step.</p>
 <figure>
 <img src="figures/solver.png" alt="Integration error of the exponential update and forward Euler">
 <figcaption>Integration error against the time step for LIF, synaptic LIF and Hodgkin&ndash;Huxley.</figcaption>
@@ -440,20 +440,20 @@ cd ../.. &amp;&amp; python paper/make_results.py</div>
 <!-- CITATION -->
 <section id="citation" class="fade-in">
 <h2>Citation</h2>
-<p class="section-sub">If you use Spikeforge in your research, please cite</p>
+<p class="section-sub">If you use SpikeCraft in your research, please cite</p>
 <div class="bibtex-box">
 <button class="copy-btn" onclick="copyText(document.getElementById('bibtex-text').textContent,this)">Copy</button>
-<code id="bibtex-text" style="background:none;padding:0">@misc{spikeforge2026,
-  title  = {Spikeforge Enables Fast Exploration of Efficient Spiking Neuron Models for Embedded and Robotic AI},
+<code id="bibtex-text" style="background:none;padding:0">@misc{spikecraft2026,
+  title  = {SpikeCraft Enables Fast Exploration of Efficient Spiking Neuron Models for Embedded and Robotic AI},
   author = {Sanaullah},
   year   = {2026},
-  url    = {https://github.com/Rao-Sanaullah/spikeforge}
+  url    = {https://github.com/Rao-Sanaullah/spikecraft}
 }</code>
 </div>
 </section>
 
 <footer>
-Spikeforge &mdash; Designed by Sanaullah &middot; MIT License
+SpikeCraft &mdash; Designed by Sanaullah &middot; MIT License
 <br>
 <span style="font-size:12px;margin-top:4px;display:inline-block">Write the equations. Train the neuron. Count the spikes.</span>
 </footer>
