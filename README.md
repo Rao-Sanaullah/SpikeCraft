@@ -1,6 +1,6 @@
-# Spikeforge
+# Spikecraft
 
-**Write a spiking neuron as equations, get a trainable PyTorch layer.**
+**Write a spiking neuron as equations; get a trainable PyTorch layer.**
 
 [![PyPI](https://img.shields.io/pypi/v/spikeforge.svg)](https://pypi.org/project/spikeforge/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
