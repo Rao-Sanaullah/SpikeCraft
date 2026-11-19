@@ -4,11 +4,11 @@
 
 [![PyPI](https://img.shields.io/pypi/v/spikecraft.svg)](https://pypi.org/project/spikecraft/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Project page](https://img.shields.io/badge/project-page-1a6b4f.svg)](https://rao-sanaullah.github.io/spikecraft/)
+[![Project page](https://img.shields.io/badge/project-page-1a6b4f.svg)](https://rao-sanaullah.github.io/SpikeCraft/)
 
-SpikeCraft compiles a neuron's differential equations, spike condition and reset rules into a differentiable PyTorch module, with automatic exact-exponential integration, surrogate gradients and learnable time constants. Ten neuron models (LIF to Hodgkin–Huxley) ship as editable equation presets.
+SpikeCraft compiles a neuron's differential equations, spike condition, and reset rules into a differentiable PyTorch module, with automatic exact-exponential integration, surrogate gradients, and learnable time constants. Ten neuron models (LIF to Hodgkin–Huxley) ship as editable equation presets.
 
-> Full documentation, results and figures are on the **[project page](https://rao-sanaullah.github.io/spikecraft/)**.
+> Full documentation, results and figures are on the **[project page](https://rao-sanaullah.github.io/SpikeCraft/)**.
 
 ## Install
 
