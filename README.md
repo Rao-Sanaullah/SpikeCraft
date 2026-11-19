@@ -8,7 +8,7 @@
 
 Spikeforge compiles a neuron's differential equations, spike condition and reset rules into a differentiable PyTorch module, with automatic exact-exponential integration, surrogate gradients and learnable time constants. Ten neuron models (LIF to Hodgkin–Huxley) ship as editable equation presets.
 
-> Full documentation, results and figures are on the **[project page](https://rao-sanaullah.github.io/spikeforge/)**.
+> Full documentation, results and figures are on the **[project page](https://rao-sanaullah.github.io/Spikeforge/)**.
 
 ## Install
 
