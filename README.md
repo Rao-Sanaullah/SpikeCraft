@@ -37,7 +37,6 @@ layer = sf.SpikingLinear(neuron, 128, 64)   # [T, B, 128] -> [T, B, 64]
 | `tests/` | test suite (`pytest`) |
 | `examples/` | minimal training example |
 | `benchmarks/` | DVS128 Gesture, SHD and library benchmarks used in the paper |
-| `paper/make_results.py` | regenerates every figure and table from the experiment logs |
 | `docs/` | project page (GitHub Pages) |
 
 ## Citation
