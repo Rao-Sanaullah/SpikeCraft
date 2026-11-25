@@ -30,9 +30,9 @@ dev = ["pytest>=7", "build", "twine", "numpy"]
 bench = ["tonic>=1.4", "snntorch>=0.9", "numpy", "scipy", "matplotlib", "h5py"]
 
 [project.urls]
-Homepage = "https://rao-sanaullah.github.io/spikeforge/"
-Repository = "https://github.com/Rao-Sanaullah/spikeforge"
-Issues = "https://github.com/Rao-Sanaullah/spikeforge/issues"
+Homepage = "https://rao-sanaullah.github.io/SpikeCraft/"
+Repository = "https://github.com/Rao-Sanaullah/SpikeCraft"
+Issues = "https://github.com/Rao-Sanaullah/SpikeCraft/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/spikeforge"]
